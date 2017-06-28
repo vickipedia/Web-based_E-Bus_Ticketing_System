@@ -1,0 +1,202 @@
+<html>
+<title>iBus</title>
+<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+<head>
+<script src="jquery.min.js"></script>
+<style type="text/css">
+@font-face {
+    font-family: temp;
+    src: url(thin.ttf);
+
+}
+#back{
+position:absolute;
+top:10%;
+right:10%;
+}
+#title{
+  position: absolute;
+  top:40.8%;
+  left: 45%;
+  font-family: temp;
+  font-size: 30px;
+  font-weight:50px;
+  display: none;
+
+}
+#img{
+  position: absolute;
+  top:36%;
+  left: 38%;
+  display: none;
+
+}
+#line{
+  width: 30%;
+  position: absolute;
+  top:50%;
+  left:33.4%;
+  display: none;
+}
+#add{
+  position: absolute;
+  top:60%;
+  left:33.4%;
+  display: none;
+
+}
+#sub{
+  position: absolute;
+  top:60%;
+  left:47%;
+  filter: grayscale(100%);
+  display: none;
+}
+#list{
+  position: absolute;
+  top:60%;
+  left:60%;
+  filter: grayscale(100%);
+  display: none;
+}
+#add_span{
+}
+input[name="id"]{
+  height: 30px;
+  width: 50px;
+}
+input[name="add"]{
+  height:30px;
+  width:300px;
+}
+input[type="time"]{
+  width: 150px;
+  height: 30px;
+  color:grey;
+}
+input[name="src"],input[name="dest"]{
+  width: 200px;
+  height: 30px;
+  color:grey;
+}
+input[type="button"]{
+  color: grey;
+  width:80px;
+  height: 50px;
+}
+
+#add_span{
+  position: absolute;
+  bottom: 5%;
+  left:10%;
+  display: none;
+}
+#del_span{
+  position: absolute;
+  bottom: 16%;
+  left:47%;
+  display: none;
+
+}
+#all_list{
+  position: absolute;
+  bottom: 16%;
+  left:44.5%;
+  font-family: temp;
+  color:grey;
+  text-decoration: none;
+  display: none;
+
+}
+a{
+  text-decoration-style: none;
+  text-decoration: none;
+  color:grey;
+}
+
+</style>
+</head>
+<script>
+$(document).ready(function(){
+    $("#img,#title").fadeIn(700);
+    $("#line").delay(500).fadeIn(500);
+    $("#add,#sub,#list").delay(1000).fadeIn(250);
+    $("#add").click(function(){
+      $("#add_span").fadeToggle('slow');
+      $("#del_span,#all_list").fadeOut('slow');
+    });
+    $("#sub").click(function(){
+      $("#del_span").fadeToggle('slow');
+      $("#add_span,#all_list").fadeOut('slow');
+    });
+    $("#list").click(function(){
+      $("#all_list").fadeToggle('slow');
+      $("#add_span,#del_span").fadeOut('slow');
+    });
+
+
+});
+</script>
+<body>
+  <div id="back">
+  <a href="index.html"><input type="button" value="Home"></a>
+  </div>
+  <div id="img"><img src="apple.png" height="100px" width="132px"></div>
+  <div id="title">iBus Care</div>
+  <div id="line"><hr></div>
+  <a href="#"><div id="add"><img src="plus.png" width="60px" height="60px"></div></a>
+  <a href="#"><div id="sub"><img src="trash.png" width="60px" height="60px"></img></div></a>
+  <a href="#"><div id="list"><img src="list.png" width="60px" height="60px"></img></div></a>
+  
+  <div id="add_span">
+  <form name="add" action="add.jsp" method="post">
+  <input name="id" type="number" min="1"  placeholder="ID">&nbsp;&nbsp;&nbsp;</input>
+  <input type="textbox" name="busname" placeholder="Bus Name"></input>&nbsp;&nbsp;
+  <input type="time" name="depart" placeholder="Time" value="00:00:00"></input>&nbsp;
+  <input id="dat" name="date" type="date" min="2016-09-10" value="2016-09-10"></input>&nbsp;
+  <input type="textbox" name="src" placeholder="Starting"></input>&nbsp;
+  <input type="textbox" name="dest" placeholder="Destination"></input>&nbsp;
+  <br><br>
+  <center>
+  <input type="number" name="seats" placeholder="Seats" min="1"></input>&nbsp;
+  <input type="number" name="cost" placeholder="Cost" min="0"></input>&nbsp;
+  <br><br>
+  <input type="Submit" value="Add"></input></center></form></div>
+  
+  <div id="del_span">
+  <form name="del" action="del.jsp" method="post">
+  <br>
+  <br>
+  <center>
+  <input name="id" type="number" min="1"  placeholder="ID">&nbsp;
+  </input>
+  <br><br>
+  <input type="Submit" value="Remove"></input></form></div>
+  </center>
+  
+  <div id="all_list">
+  <form name="show" action="disp.jsp" method="post">
+  <input type="Submit" value="Show All"></input>
+  </form>
+  </div>
+
+<script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("dat").setAttribute("value", today);
+document.getElementById("dat").setAttribute("min", today);
+</script>
+
+
+</body>
+</html>
